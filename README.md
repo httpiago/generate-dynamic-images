@@ -15,6 +15,7 @@ Um simples servidor que gera imagens usando HTML.
 ## Pacotes usados
 
 - [puppeteer-core](https://www.npmjs.com/package/puppeteer-core)
+- [micro](https://www.npmjs.com/package/micro)
 - [create-html](https://www.npmjs.com/package/create-html)
 
 ## Hospedagem
