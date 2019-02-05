@@ -6,12 +6,13 @@
   "author": "Iago Bruno <httpiago@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "micro "
+    "start": "micro"
   },
   "dependencies": {
+    "chrome-aws-lambda": "^1.11.2",
     "create-html": "^4.1.0",
     "micro": "^9.3.3",
-    "puppeteer": "^1.12.1",
+    "puppeteer-core": "^1.12.1",
     "url": "^0.11.0"
   }
 }

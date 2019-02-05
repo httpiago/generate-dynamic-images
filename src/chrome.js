@@ -1,4 +1,5 @@
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
+const chromium = require('chrome-aws-lambda')
 const { join, dirname, basename } = require('path')
 
 /**
@@ -8,7 +9,11 @@ const { join, dirname, basename } = require('path')
  */
 module.exports = async (url, type) => {
   'use strict';
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
+  });
 
   const page = await browser.newPage();
 
