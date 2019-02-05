@@ -6,7 +6,7 @@ const { join, dirname, basename } = require('path')
  * no argumento "url" e retornar o print.
  * @param {string} url
  */
-module.exports = async (url, type) => {
+module.exports = async (url, type = 'jpeg' || 'png') => {
   'use strict';
   const browser = await puppeteer.launch();
 
@@ -19,7 +19,12 @@ module.exports = async (url, type) => {
 
   await page.goto(pathToFileURL(url));
 
-  const file = await page.screenshot({ type });
+  const file = await page.screenshot({
+    type,
+    quality: 90, // Entre 0 e 100 (somente para jpeg)
+    fullPage: true, // Capturar toda a página além do viewport
+    omitBackground: false // Opção para capturar a página com fundo transparent (somente para png)
+  });
 
   await browser.close();
 
