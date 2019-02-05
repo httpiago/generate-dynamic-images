@@ -7,8 +7,7 @@ const { join, dirname, basename } = require('path')
  * no argumento "url" e retornar o print.
  * @param {string} url
  */
-module.exports = async (url, type = 'jpeg' || 'png') => {
-  'use strict';
+module.exports = async (url: string, type: FileType = 'jpeg') => {
   const browser = await puppeteer.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath,
@@ -40,7 +39,7 @@ module.exports = async (url, type = 'jpeg' || 'png') => {
  * Transformar o url de um arquivo local em um url que o Chrome possa entender.
  * @param {string} path 
  */
-function pathToFileURL(path) {
+function pathToFileURL(path: string) {
   const fileName = basename(path);
   const folderName = dirname(path);
   const fileUrl = 'file://' + join(folderName, encodeURIComponent(fileName));

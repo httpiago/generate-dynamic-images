@@ -4,14 +4,14 @@ const { tmpdir } = require('os');
 const { promisify } = require('util');
 const { writeFile } = require('fs');
 const writeFileAsync = promisify(writeFile)
-const crypto = require('crypto')
-const randomBytesAsync = promisify(crypto.randomBytes)
+const cryptoModule = require('crypto')
+const randomBytesAsync = promisify(cryptoModule.randomBytes)
 
 /**
  * Gerar o HTML e salvar em uma pasta temporária.
  * @param {Object}
  */
-module.exports = async (props) => {
+module.exports = async (props: PropTypes) => {
   const {
     title = 'Olá mundo!'
   } = props
@@ -36,7 +36,7 @@ module.exports = async (props) => {
  * Salvar um arquivo em uma pasta temporária.
  * @param {string} contents 
  */
-async function writeTempFile(contents) {
+async function writeTempFile(contents: string) {
   const id = await randomBytesAsync(16)
   const randomPath = path.join(tmpdir(), `${id.toString("hex")}.html`);
   

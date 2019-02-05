@@ -5,7 +5,7 @@ const getScreenshot = require('./chrome')
 /**
  * Função acionada pelo pacote micro sempre que o servidor for chamado na porta 3000.
  */
-module.exports = async (req, res) => {
+module.exports = async (req: any, res: any) => {
   try {
     // Pegar as informações passada no queryString
     const parsedReq = await parseRequest(req)
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
     // Gerar o HTML da página
     const filePath = await generateHTML(parsedReq)
-    const fileType = 'jpeg' // 'jpeg' or 'png'
+    const fileType: FileType = parsedReq.type || 'jpeg' // 'jpeg' or 'png'
 
     // Tirar um print da página salva no passo anterior
     const file = await getScreenshot(filePath, fileType)
