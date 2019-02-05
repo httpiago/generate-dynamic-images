@@ -1,12 +1,14 @@
 {
   "name": "puppeteer-generate-image",
   "version": "1.0.0",
-  "main": "src/index.js",
   "repository": "https://github.com/httpiago/generate-image.git",
-  "author": "Iago Bruno <httpiago@gmail.com>",
   "license": "MIT",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "micro"
+    "start": "micro",
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "now-build": "tsc"
   },
   "dependencies": {
     "chrome-aws-lambda": "^1.11.2",
@@ -14,5 +16,10 @@
     "micro": "^9.3.3",
     "puppeteer-core": "^1.12.1",
     "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.21",
+    "@types/puppeteer-core": "^1.9.0",
+    "typescript": "^3.3.1"
   }
 }
