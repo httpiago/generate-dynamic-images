@@ -4,8 +4,8 @@ const { tmpdir } = require('os');
 const { promisify } = require('util');
 const { writeFile } = require('fs');
 const writeFileAsync = promisify(writeFile)
-const cryptoModule = require('crypto')
-const randomBytesAsync = promisify(cryptoModule.randomBytes)
+const { randomBytes } = require('crypto')
+const randomBytesAsync = promisify(randomBytes)
 
 
 export const checkIsDev: boolean = !process.env.NOW_REGION

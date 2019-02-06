@@ -43,7 +43,7 @@ module.exports = (props: PropTypes) => {
     </style>
 
     <div class="container">
-      <img src="${PUBLIC_DIR_PATH}/Twitter_Logo_WhiteOnBlue.png">
+      <img src="${PUBLIC_DIR_PATH}/Twitter_Logo.png">
       <h1>Usuário: ${userName}</h1>
     </div>
   `

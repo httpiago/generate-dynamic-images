@@ -6,7 +6,10 @@ export default async (req: any) => {
 
   // Checar se o client definiu um template a ser usado
   if (typeof query.template === 'undefined' || query.template === '') {
-    throw new HTTP_Error({ code: 400, message: 'Defina um template a ser usado.' });
+    throw new HTTP_Error({
+      code: 400,
+      message: 'Defina um template a ser usado. <a href="?template=default">Exemplo</a>'
+    });
   }
 
   return query || {}

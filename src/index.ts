@@ -1,11 +1,12 @@
 import parseRequest from './parser'
 import generateHTML from './generate-html'
 import getScreenshot from './chrome'
+import { IncomingMessage, ServerResponse } from 'http'
 
 /**
  * Função acionada pelo pacote micro sempre que o servidor for chamado na porta 3000.
  */
-module.exports = async (req: any, res: any) => {
+export default async function requestHandler(req: IncomingMessage, res: ServerResponse) {
   try {
     // Pegar as informações passada no queryString
     const parsedReq = await parseRequest(req)
@@ -38,7 +39,7 @@ module.exports = async (req: any, res: any) => {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.end(`
       <h1 style="font-size: 3em;">${error.title}</h1>
-      <p style="margin: -20px 0 40px;">${error.message}</p>
+      <p style="margin: -20px 0 40px;font-size: 18px;">${error.message}</p>
       <p>Veja mais informações no console.</p>
     `);
 
