@@ -12,6 +12,7 @@ const randomBytesAsync = promisify(cryptoModule.randomBytes)
  * @param {Object}
  */
 module.exports = async (props: PropTypes) => {
+  // Valores padrão
   const {
     title = 'Olá mundo!'
   } = props

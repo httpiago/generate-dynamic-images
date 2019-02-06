@@ -1,7 +1,7 @@
 type FileType = 'jpeg' | 'png'
 
 interface PropTypes {
-  title?: string;
+  [key: string]: any
 }
 
 interface ChromeConfigs {
