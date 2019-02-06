@@ -2,10 +2,9 @@
   "version": 2,
   "builds": [
     { "src": "public/*", "use": "@now/static" },
-    { "src": "package.json", "use": "@now/static-build" },
-    { "src": "src/index.ts", "use": "@now/node@canary", "config": { "maxLambdaSize": "40mb" } }
+    { "src": "src/index.js", "use": "@now/node-server", "config": { "maxLambdaSize": "40mb" } }
   ],
   "routes": [
-    { "src": "/", "dest": "/src/index.ts" }
+    { "src": "/", "dest": "/src/index.js" }
   ]
 }

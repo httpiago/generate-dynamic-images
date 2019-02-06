@@ -3,24 +3,15 @@
   "version": "1.0.0",
   "repository": "https://github.com/httpiago/generate-image.git",
   "license": "MIT",
-  "main": "dist/src/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "micro",
-    "dev": "tsc --watch",
-    "build": "tsc",
-    "now-build": "tsc"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "chrome-aws-lambda": "^1.11.2",
-    "create-html": "^4.1.0",
     "micro": "^9.3.3",
     "puppeteer-core": "^1.12.1",
     "url": "^0.11.0"
   },
-  "devDependencies": {
-    "@types/micro": "^7.3.3",
-    "@types/node": "^10.12.21",
-    "@types/puppeteer-core": "^1.9.0",
-    "typescript": "^3.3.1"
-  }
+  "devDependencies": {}
 }

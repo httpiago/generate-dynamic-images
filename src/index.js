@@ -1,12 +1,12 @@
-import parseRequest from './parser'
-import generateHTML from './generate-html'
-import getScreenshot from './chrome'
-import { IncomingMessage, ServerResponse } from 'http'
+const micro = require('micro')
+const parseRequest = require('./parser')
+const generateHTML = require('./generate-html')
+const getScreenshot = require('./chrome')
 
 /**
  * Função acionada pelo pacote micro sempre que o servidor for chamado na porta 3000.
  */
-export default async function requestHandler(req: IncomingMessage, res: ServerResponse) {
+async function requestHandler(req, res) {
   try {
     // Pegar as informações passada no queryString
     const parsedReq = await parseRequest(req)
@@ -17,7 +17,7 @@ export default async function requestHandler(req: IncomingMessage, res: ServerRe
 
     // Gerar o HTML da página
     const filePath = await generateHTML(parsedReq)
-    const fileType: FileType = parsedReq.type || 'jpeg'
+    const fileType = parsedReq.type || 'jpeg'
 
     // Tirar um print da página salva no passo anterior
     const file = await getScreenshot({
@@ -35,7 +35,7 @@ export default async function requestHandler(req: IncomingMessage, res: ServerRe
   }
   catch (error) {
     // ERRROOOUU!
-    res.statusCode = error.code || 500;
+    res.statusCode = error.statusCode || 500;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.end(`
       <h1 style="font-size: 3em;">${error.title}</h1>
@@ -46,3 +46,11 @@ export default async function requestHandler(req: IncomingMessage, res: ServerRe
     console.error(error);
   }
 }
+
+const PORT = process.env.PORT || 3000
+
+// INIT!
+micro(requestHandler)
+  .listen(PORT, () => {
+    console.log(`🚀  Rodando na porta -> http://localhost:${PORT}`)
+  })

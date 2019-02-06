@@ -1,16 +1,11 @@
-import { PUBLIC_DIR_PATH } from '../src/Utils'
-
-interface PropTypes {
-  title?: string,
-  withImage?: 'true' | 'false'
-}
+const { PUBLIC_DIR_PATH } = require('../src/Utils')
 
 /**
  * Gerar html da uma imagem genérica para teste.
  * 
  * @param {Object} props Valores recebidos no query string da solicitação.
  */
-module.exports = (props: PropTypes) => {
+module.exports = (props) => {
   const {
     title = "Olá mundo!",
     withImage = 'true'

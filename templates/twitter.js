@@ -1,17 +1,13 @@
-import { PUBLIC_DIR_PATH } from '../src/Utils'
-
-interface PropTypes {
-  userName?: string
-}
+const { PUBLIC_DIR_PATH } = require('../src/Utils')
 
 /**
  * Gerar html da uma imagem para ser compartilhada no twitter.
  * 
  * @param {Object} props Valores recebidos no query string da solicitação.
  */
-module.exports = (props: PropTypes) => {
+module.exports = (props) => {
   const {
-    userName = "@github"
+    username = "github"
   } = props
 
   return `
@@ -44,7 +40,7 @@ module.exports = (props: PropTypes) => {
 
     <div class="container">
       <img src="${PUBLIC_DIR_PATH}/Twitter_Logo.png">
-      <h1>Usuário: ${userName}</h1>
+      <h1>Usuário: @${username}</h1>
     </div>
   `
 }

@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer-core')
-import { getChromeConfigs, pathToFileURL} from './Utils'
+const { getChromeConfigs, pathToFileURL} = require('./Utils')
 
 /**
  * Criar uma nova instância do Google Chrome, tirar um print do arquivo passado
  * no argumento "url" e retornar o print.
  */
-export default async ({ filePath, fileType = 'jpeg', quality = 90, omitBackground = false }: ScreenshotOptions) => {
+module.exports = async ({ filePath, fileType = 'jpeg', quality = 90, omitBackground = false }) => {
   const chromeLaunchConfigs = await getChromeConfigs();
   // Criar instância do Chrome
   const browser = await puppeteer.launch(chromeLaunchConfigs);

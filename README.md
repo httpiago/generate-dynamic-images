@@ -6,10 +6,8 @@ Um simples servidor em Node que automatiza o processo de criação de imagens di
 
 ## Pacotes usados
 
-- [TypeScript](https://www.npmjs.com/package/typescript)
 - [puppeteer-core](https://www.npmjs.com/package/puppeteer-core)
 - [micro](https://www.npmjs.com/package/micro)
-- [create-html](https://www.npmjs.com/package/create-html)
 
 ## Fluxograma
 

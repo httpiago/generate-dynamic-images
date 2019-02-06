@@ -8,13 +8,13 @@ const { randomBytes } = require('crypto')
 const randomBytesAsync = promisify(randomBytes)
 
 
-export const checkIsDev: boolean = !process.env.NOW_REGION
+const checkIsDev = !process.env.NOW_REGION
 
 /**
  * Transformar o url de um arquivo local em um url que o Chrome possa entender.
  * @param {string} path 
  */
-export function pathToFileURL(path: string) {
+function pathToFileURL(path) {
   const fileName = basename(path);
   const folderName = dirname(path);
   const fileUrl = 'file://' + join(folderName, encodeURIComponent(fileName));
@@ -26,7 +26,7 @@ export function pathToFileURL(path: string) {
  * Retorna as configurações de inicialização do Google Chrome dependendo do embiente
  * em que o programa está.
  */
-export async function getChromeConfigs(): Promise<ChromeConfigs> {
+async function getChromeConfigs() {
   return (checkIsDev === true)
     // Configurações do Chrome no embiente de desenvolvimento
     ? {
@@ -47,13 +47,13 @@ export async function getChromeConfigs(): Promise<ChromeConfigs> {
  * Caminho para a pasta "public" que pode ser acessada tanto no servidor
  * como localmente.
  */
-export const PUBLIC_DIR_PATH: string = pathToFileURL( resolve(__dirname, '..', 'public').replace(/dist\\/g, '') )
+const PUBLIC_DIR_PATH = pathToFileURL( resolve(__dirname, '..', 'public').replace(/dist\\/g, '') )
 
 /**
  * Salvar um arquivo em uma pasta temporária.
  * @param {string} contents 
  */
-export async function writeTempFile(contents: string) {
+async function writeTempFile(contents) {
   let htmlFilePath
 
   if (checkIsDev) {
@@ -71,33 +71,31 @@ export async function writeTempFile(contents: string) {
   return htmlFilePath
 }
 
-
-type ErrorNumber = 400 | 403 | 404 | 500 | number;
-interface ErrorTypes {
-  message: string;
-  /** https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status */
-  code?: ErrorNumber;
-}
-
 /**
  * Criar um erro personalizado para mostrar mais informações ao cliente.
  */
-export class HTTP_Error {
-  public code?: ErrorNumber;
-  public title: string;
-  public message: string;
-  public stack: any;
+class HTTP_ERROR {
+  constructor({ statusCode = 500, message = 'Ocorreu um erro desconhecido. Veja mais no console' }) {
+    const error = new Error(message)
 
-  constructor({ code = 500, message = 'Ocorreu um erro desconhecido. Veja mais no console' }: ErrorTypes) {
-    this.title =
-      (code === 400) ? 'Bad Request' :
-      (code === 403) ? 'Forbidden' :
-      (code === 404) ? 'Error 404' :
+    // https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status
+    error.title =
+      (statusCode === 400) ? 'Bad Request' :
+      (statusCode === 403) ? 'Forbidden' :
+      (statusCode === 404) ? 'Error 404' :
       'Internal Server Error'
+    
+    error.statusCode = statusCode
 
-    this.code = code;
-    this.message = message;
-
-    this.stack = (new Error()).stack;
+    return error;
   }
+}
+
+module.exports = {
+  PUBLIC_DIR_PATH,
+  checkIsDev,
+  pathToFileURL,
+  getChromeConfigs,
+  writeTempFile,
+  HTTP_ERROR
 }
