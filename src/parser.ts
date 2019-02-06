@@ -1,12 +1,13 @@
+import { HTTP_Error } from './Utils'
 const url = require('url')
 
-module.exports = async (req: any) => {
-  const parsedUrl = url.parse(req.url, true)
+export default async (req: any) => {
+  const { query } = url.parse(req.url, true);
 
-  // Verificar se o usuário difiniu alguma opção no query string
-  if (parsedUrl.search === '') {
-    return Promise.reject('Defina alguns argumentos no query string');
+  // Checar se o client definiu um template a ser usado
+  if (typeof query.template === 'undefined' || query.template === '') {
+    throw new HTTP_Error({ code: 400, message: 'Defina um template a ser usado.' });
   }
 
-  return parsedUrl.query || {}
+  return query || {}
 }

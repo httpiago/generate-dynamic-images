@@ -1,47 +1,25 @@
 const createHtml = require('create-html')
-const path = require('path');
-const { tmpdir } = require('os');
-const { promisify } = require('util');
-const { writeFile } = require('fs');
-const writeFileAsync = promisify(writeFile)
-const cryptoModule = require('crypto')
-const randomBytesAsync = promisify(cryptoModule.randomBytes)
+const { join } = require('path');
+const { existsSync: checkFileExists } = require('fs')
+import { writeTempFile, HTTP_Error } from './Utils'
 
 /**
- * Gerar o HTML e salvar em uma pasta temporária.
+ * Gerar o HTML do template e salvar em uma pasta temporária.
  * @param {Object}
  */
-module.exports = async (props: PropTypes) => {
-  // Valores padrão
-  const {
-    title = 'Olá mundo!'
-  } = props
+export default async ({ template, ...otherProps }: any) => {
+  const templatePath = join(__dirname, `../templates/${template}.js`)
 
+  // Checar se o template existe
+  if (checkFileExists(templatePath) === false) {
+    throw new HTTP_Error({ code: 404, message: `Template "${template}" não existe.` });
+  }
+
+  const content = require(templatePath)(otherProps)
+  // Gerar HTML
   const html = createHtml({
-    head: `
-      <style>
-        body {
-          background: #eee;
-        }
-      </style>
-    `,
-    body: `
-      <h1>${title}</h1>
-    `
+    body: content
   })
 
   return await writeTempFile(html)
-}
-
-/**
- * Salvar um arquivo em uma pasta temporária.
- * @param {string} contents 
- */
-async function writeTempFile(contents: string) {
-  const id = await randomBytesAsync(16)
-  const randomPath = path.join(tmpdir(), `${id.toString("hex")}.html`);
-  
-  await writeFileAsync(randomPath, contents);
-
-  return randomPath;
 }
