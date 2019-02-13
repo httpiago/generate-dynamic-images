@@ -1,7 +1,7 @@
 {
-  "name": "puppeteer-generate-image",
-  "version": "1.0.0",
-  "repository": "https://github.com/httpiago/generate-image.git",
+  "name": "generate-dynamic-images",
+  "version": "1.1.0",
+  "repository": "https://github.com/httpiago/generate-dynamic-images.git",
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
@@ -13,5 +13,7 @@
     "puppeteer-core": "^1.12.1",
     "url": "^0.11.0"
   },
-  "devDependencies": {}
+  "engines" : {
+    "node" : ">=8.0.0"
+  }
 }

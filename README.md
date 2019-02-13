@@ -1,6 +1,6 @@
-# puppeteer-generate-image
+# generate-dynamic-images
 
-Um simples servidor em Node que automatiza o processo de criação de imagens dinâmicas usando HTML.
+Um simples servidor em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome.
 
 #### [Inspirado nesse repositório](https://github.com/styfle/og-image) • [Online demo](https://puppeteer-generate-image-ee5mis3oh.now.sh?title=Hello%20Github%20user!)
 
@@ -8,14 +8,15 @@ Um simples servidor em Node que automatiza o processo de criação de imagens di
 
 - [puppeteer-core](https://www.npmjs.com/package/puppeteer-core)
 - [micro](https://www.npmjs.com/package/micro)
+- [chrome-aws-lambda](https://www.npmjs.com/package/chrome-aws-lambda)
 
 ## Fluxograma
 
 ![Fluxograma do processo](/public/fluxograma.jpeg)
 
-- O passo 1 acontece no arquivo src/parser.js
-- Os passos 2 e 3 acontecem no arquivo src/generate-html.js
-- Os passos 4 e 5 acontecem no arquivo src/chrome.js
+- O passo 1 ocorre no arquivo `src/parser.js`
+- Os passos 2 e 3 acontecem nos arquivos `templates/**.js` e `src/generate-html.js`, respectivamente
+- Os passos 4 e 5 acontecem no arquivo `src/chrome.js`
 
 ## Exemplo de solicitação
 
@@ -34,7 +35,7 @@ Content-Length: *
 Cache-Control: public, immutable, no-transform, max-age=31536000
 ```
 
-### Opções padrão de personalização
+### Opções padrões de personalização
 
 | Opção | Valores aceitos | Valor padrão | Opcional | Descrição |
 |-------------|---|---|---|---|
@@ -47,7 +48,7 @@ Cache-Control: public, immutable, no-transform, max-age=31536000
 
 ## Templates
 
-Templates nada mais são do que um arquivo .js que exporta por padrão uma função pura que irá receber as opções definidas no query string das solicitações e retorna um html que será printado. Exemplo:
+Templates nada mais são do que um arquivo .js que exporta por padrão uma função assíncrona pura que irá receber as opções definidas no query string das solicitações e retorna um html que será printado. Exemplo:
 
 #### templates/FILE_NAME.js:
 
@@ -55,10 +56,12 @@ Templates nada mais são do que um arquivo .js que exporta por padrão uma funç
 const { PUBLIC_DIR_PATH } = require('../src/Utils')
 
 /**
- * Gerar html de uma imagem genérica para teste.
+ * Gerar HTML de uma imagem genérica para teste.
+ * @async
  * @param {Object} props - Valores recebidos no query string da solicitação.
+ * @returns {Promise<string>} Template a ser renderizado.
  */
-module.exports = (props) => {
+module.exports = async (props) => {
   const {
     bigTitle = "Olá mundo!"
   } = props

@@ -2,10 +2,11 @@ const { PUBLIC_DIR_PATH } = require('../src/Utils')
 
 /**
  * Gerar html da uma imagem genérica para teste.
- * 
+ * @async
  * @param {Object} props Valores recebidos no query string da solicitação.
+ * @returns {Promise<string>} Template a ser renderizado.
  */
-module.exports = (props) => {
+module.exports = async (props) => {
   const {
     title = "Olá mundo!",
     withImage = 'true'

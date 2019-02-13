@@ -51,6 +51,4 @@ const PORT = process.env.PORT || 3000
 
 // INIT!
 micro(requestHandler)
-  .listen(PORT, () => {
-    console.log(`🚀  Rodando na porta -> http://localhost:${PORT}`)
-  })
+  .listen(PORT, () => console.log(`🚀  Rodando na porta -> http://localhost:${PORT}`))

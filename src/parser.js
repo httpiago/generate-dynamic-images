@@ -1,6 +1,11 @@
 const { HTTP_ERROR } = require('./Utils')
 const url = require('url')
 
+/**
+ * Transformar o query string da solicitação em um object que possa ser
+ * entendido pelo JavaScript.
+ * @returns {Object}
+ */
 module.exports = async (req) => {
   const { query } = url.parse(req.url, true);
 
