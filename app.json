@@ -1,0 +1,19 @@
+{
+  "name": "generate-dynamic-images",
+  "description": "Um simples servidor em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome.",
+  "repository": "https://github.com/httpiago/generate-dynamic-images",
+  "logo": "https://user-images.githubusercontent.com/10379601/29446482-04f7036a-841f-11e7-9872-91d1fc2ea683.png",
+  "image": "heroku/nodejs",
+  "buildpacks": [
+    {
+      "url": "https://github.com/jontewks/puppeteer-heroku-buildpack"
+    }
+  ],
+  "success_url": "/?template=default&title=Hello%20Heroku!&emoji=⚛",
+  "keywords": [
+    "node",
+    "puppeteer",
+    "chrome",
+    "typescript"
+  ]
+}

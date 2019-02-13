@@ -26,7 +26,7 @@ export function pathToFileURL(path: string): string {
  * Caminho para a pasta "public" que pode ser acessada tanto no servidor
  * como localmente.
  */
-export const PUBLIC_DIR_PATH: string = pathToFileURL( resolve(__dirname, '..', 'public').replace(/dist\\/g, '') )
+export const PUBLIC_DIR_PATH: string = pathToFileURL( resolve('./public').replace(/dist\\/g, '') )
 
 /**
  * Salvar um arquivo em uma pasta temporária.

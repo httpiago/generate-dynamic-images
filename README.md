@@ -2,13 +2,13 @@
 
 Um simples servidor em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome.
 
-#### [Inspirado nesse repositório](https://github.com/styfle/og-image) • [Online demo](https://puppeteer-generate-image-ee5mis3oh.now.sh?title=Hello%20Github%20user!)
+#### [Inspirado nesse repositório](https://github.com/styfle/og-image) • [Online demo](https://generate-dynamic-image.herokuapp.com/?template=default&title=Hello%20Github%20user!&emoji=%F0%9F%9A%80%F0%9F%8C%8E)
 
 ## Pacotes usados
 
-- [puppeteer-core](https://www.npmjs.com/package/puppeteer-core)
+- [puppeteer](https://www.npmjs.com/package/puppeteer)
 - [micro](https://www.npmjs.com/package/micro)
-- [chrome-aws-lambda](https://www.npmjs.com/package/chrome-aws-lambda)
+- [typescript](https://www.npmjs.com/package/typescript)
 
 ## Fluxograma
 
@@ -48,9 +48,9 @@ Cache-Control: public, immutable, no-transform, max-age=31536000
 
 ## Templates
 
-Templates nada mais são do que um arquivo .js que exporta por padrão uma função assíncrona pura que irá receber as opções definidas no query string das solicitações e retorna um html que será printado. Exemplo:
+Templates nada mais são do que um arquivo .ts que exporta por padrão uma função assíncrona pura que recebe as opções definidas no query string das solicitações no primeiro argumento e retorna um html que será printado. Exemplo:
 
-#### templates/FILE_NAME.js:
+#### templates/FILE_NAME.ts:
 
 ```js
 import { PUBLIC_DIR_PATH } from '../src/Utils'
@@ -61,7 +61,7 @@ import { PUBLIC_DIR_PATH } from '../src/Utils'
  * @param {Object} props - Valores recebidos no query string da solicitação.
  * @returns {Promise<string>} Template a ser renderizado.
  */
-module.exports = async (props) => {
+export default async (props) => {
   // Valores padrões
   const {
     bigTitle = "Olá mundo!"
@@ -89,10 +89,10 @@ curl http://localhost:3000?template=FILE_NAME&bigTitle=Hello
 
 ## Hospedagem
 
-Pode ser hospedado em qualquer servidor que aceite Node e que tenha suporte ao Chrome, como o [now](https://zeit.co/now), AWS Lambda e Google Cloud Functions.  
-Caso contrário será necessário substituir o pacote "puppeteer-core" pelo "puppeteer" que faz o download da versão mais recente do Chromium durante a instalação dos pacotes. [Ler mais sobre diferenças entre os dois](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteer-vs-puppeteer-core).
+Pode ser hospedado em qualquer servidor que aceite Node, como por exemplo o Heroku. Lembrando que é necessário a compilação dos códigos typescript.
+> No caso do Heroku é necessário usar um [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) para o puppeteer funcionar normalmente. Se você escolher outro serviço, terá que checar manualmente se ocorre algum problema.  O botão abaixo configura automaticamente o ambiente pra você.
 
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/httpiago/puppeteer-generate-image)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/httpiago/generate-dynamic-images/tree/master)
 
 ## License
 
