@@ -2,7 +2,7 @@
 
 Um simples servidor em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome.
 
-#### [Inspirado nesse repositório](https://github.com/styfle/og-image) • [Online demo](https://generate-dynamic-image.herokuapp.com/?template=default&title=Hello%20Github%20user!&emoji=%F0%9F%9A%80%F0%9F%8C%8E)
+#### [Inspirado nesse repositório](https://github.com/styfle/og-image) • [Online demo](https://generate-dynamic-images.herokuapp.com/?template=default&title=Hello%20Github%20user!&emoji=%F0%9F%9A%80%F0%9F%8C%8E)
 
 ## Pacotes usados
 
