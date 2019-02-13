@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer'
-import { pathToFileURL } from './Utils'
+import { pathToFileURL, executablePath } from './Utils'
 
 interface Configs {
   filePath: string;
@@ -27,7 +27,7 @@ async function getScreenshot(configs: Configs): Promise<Buffer> {
   // Criar instância do Chrome
   const browser = await puppeteer.launch({
     args: [ '--no-sandbox', '--disable-setuid-sandbox' ],
-    // executablePath: null, // Instalação do Chrome local = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
+    executablePath,
     headless: true,
     defaultViewport: {
       width: 1, height: 1
@@ -39,7 +39,7 @@ async function getScreenshot(configs: Configs): Promise<Buffer> {
   await page.goto(pathToFileURL(filePath));
   
   await page.addStyleTag({
-    content: `body { margin: 0; }`
+    content: `body { background: transparent; margin: 0; }`
   })
 
   const file = await page.screenshot({

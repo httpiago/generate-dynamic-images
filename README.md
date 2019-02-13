@@ -11,21 +11,15 @@ o Google Chrome em modo _headless_. [Veja alguns exemplos de uso](#exemplos-de-u
 - [puppeteer](https://www.npmjs.com/package/puppeteer): Para manipular o G Chrome em modo _headless_.
 - [micro](https://www.npmjs.com/package/micro): Criar um simples servidor http.
 - [typescript](https://www.npmjs.com/package/typescript): Fazer a tipagem do código.
-- [emojiOne](https://www.emojione.com/): Para renderizar os emojis nos templates.
-- [concurrently](https://www.npmjs.com/package/concurrently): Executar vários comandos em paralelo.
-- [nodemon](https://www.npmjs.com/package/nodemon): Restartar o servidor quando ocorrer uma alteração.
+- [emojiOne](https://www.emojione.com/): Para renderizar os emojis bonitos nos templates.
+- [concurrently](https://www.npmjs.com/package/concurrently): Executar vários comandos em paralelo no terminal.
+- [nodemon](https://www.npmjs.com/package/nodemon): Restartar o servidor quando ocorrer uma alteração nos arquivos.
 
 ## Comandos 🤓
 
 - `yarn run build` e `yarn run watch`: Compilar os códigos typescript.
 - `yarn run start`: Iniciar o servidor em modo produção (com os códigos compilados) na porta 3000.
 - `yarn run dev`: Executa em paralelo os comandos "build" e "start" junto com o nomemon, para que o servidor se auto reiniciei quando ocorrer qualquer alteração de código (Veja também a sessão abaixo).
-
-## Debug 👾
-
-Esse projeto está configurado para rodar o debugger do VS Code, basta pressionar F5 e selecionar a opção "Attach to a running server".
-
-**OBS**: Necessita que o comando `yarn run dev` seja executado antes em um terminal separado.
 
 ## Fluxograma 🤔
 
@@ -52,16 +46,16 @@ Content-Length: *
 Cache-Control: public, immutable, no-transform, max-age=31536000
 ```
 
-### Opções padrões de personalização
+### Opções padrões de personalização ⚙
 
 | Opção | Valores aceitos | Valor padrão | Opcional | Descrição |
 |-------------|---|---|---|---|
-| template    | Nome de algum arquivo na pasta "[templates](/templates)". | null | Não | Template a ser usado para a criação da imagem. |
+| template    | Nome de algum arquivo na pasta "[templates](/templates)". | undefined | Não | Template a ser usado para a criação da imagem. |
 | type        | "jpeg" ou "png" | jpeg | Sim | Mime type da imagem. |
 | quality     | 0-100 | 90 | Sim | Qualidade do resultado (OBS: Só funciona se o type for "jpeg"). |
 | transparent | true ou false | false | Sim | Use essa opção para remover o fundo da página (OBS: Só funciona se o type for "png" e se o template não conter um fundo também). |
 
-#### Outros valores para personalizar a imagem em si (como "title", "withImage", ...) variam de acordo com o template. Veja as opções disponíveis para cada arquivo da pasta "[templates](/templates)".
+#### Outros valores para personalizar a imagem em si (como "title", "background", ...) variam de acordo com o template. Veja as opções disponíveis para cada arquivo na pasta "[templates](/templates)".
 
 ## Templates 📚
 
@@ -105,6 +99,10 @@ curl http://localhost:3000?template=FILE_NAME&bigTitle=Hello
 
 > **Dica:** Você pode usar emojis nos templates tanto no formado [unicode](https://unicode.org/emoji/charts/full-emoji-list.html) quanto no formato [shortname](https://gist.github.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb) que os emojis ~~feios~~ nativos do sistema irão ser convertidos para os do [EmojiOne](https://www.emojione.com/). 🎉😍💯❤
 
+## Debug 👾
+
+Esse projeto tem suporte ao debugger do VS Code, basta pressionar F5 e selecionar a opção "Attach to a running server". **OBS**: Você deve primeiro executar o comando `yarn run dev` em um terminal separado.
+
 ## Hospedagem 🌎
 
 Pode ser hospedado em qualquer servidor que aceite Node, como por exemplo o Heroku. Lembrando que é necessário a compilação dos códigos typescript.
@@ -119,7 +117,7 @@ Pode ser hospedado em qualquer servidor que aceite Node, como por exemplo o Hero
 -  Criar uma variação de um logotipo para um evento sazonal.
 -  Personalizar a foto de perfil do usuário (cortar, adicionar um ícone/distintivo no canto, ...).
 -  Edição de fotos usando [css filters](https://css-tricks.com/almanac/properties/f/filter/) (Por que não?).
--  Usar o [GitHub Webhooks](https://developer.github.com/webhooks/) e criar um sistema que automaticamente detecta uma nova [release em um repo](https://github.com/httpiago/generate-dynamic-images/releases) e publica um tweet anunciando a nova versão.
+-  Usando o [GitHub Webhooks](https://developer.github.com/webhooks/) é possível criar um serviço que automaticamente detecta uma nova [release em um repo](https://github.com/httpiago/generate-dynamic-images/releases)  e [publica um tweet](https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update) com uma imagem personalizada (com o número da versão, destaques, ...) anunciando a nova versão.
 -  As possibilidades são infinitas!
 
 ## Inspirações 💭

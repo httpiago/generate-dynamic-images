@@ -1,5 +1,5 @@
 import { join, dirname, basename, resolve } from 'path'
-import { tmpdir } from 'os'
+import { tmpdir, platform } from 'os'
 import { promisify } from 'util'
 import { writeFile } from 'fs'
 import { randomBytes } from 'crypto'
@@ -9,6 +9,26 @@ const randomBytesAsync = promisify(randomBytes)
 
 
 export const checkIsDev: boolean = process.env.NODE_ENV !== 'production'
+
+/**
+ * Checar qual o sistema operacional em que o servido ta rodando.
+ */
+export const getSystem: Platforms = platform()
+
+/**
+ * Caminho para a pasta "public" que pode ser acessada tanto no servidor
+ * como localmente.
+ */
+export const PUBLIC_DIR_PATH: string = pathToFileURL( resolve('./public').replace(/dist\\/g, '') )
+
+/**
+ * Buscar o caminho para a instalação local do Chrome.
+ * Se for no servidor ele não retorna nada para o puppeteer usar o Chromium baixado na instalação.
+ */
+export const executablePath: string | undefined =
+  (checkIsDev === true && getSystem === 'win32')
+  ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' // Instalação do chrome local no windows
+  : undefined
 
 /**
  * Transformar o url de um arquivo local em um url que o Chrome possa entender.
@@ -21,12 +41,6 @@ export function pathToFileURL(path: string): string {
 
   return fileUrl;
 }
-
-/**
- * Caminho para a pasta "public" que pode ser acessada tanto no servidor
- * como localmente.
- */
-export const PUBLIC_DIR_PATH: string = pathToFileURL( resolve('./public').replace(/dist\\/g, '') )
 
 /**
  * Salvar um arquivo em uma pasta temporária.
