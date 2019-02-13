@@ -1,4 +1,4 @@
-const { PUBLIC_DIR_PATH } = require('../src/Utils')
+const { PUBLIC_DIR_PATH, parseEmojis } = require('../src/Utils')
 
 /**
  * Gerar html da uma imagem genérica para teste.
@@ -7,9 +7,10 @@ const { PUBLIC_DIR_PATH } = require('../src/Utils')
  * @returns {Promise<string>} Template a ser renderizado.
  */
 module.exports = async (props) => {
+  // Valores padrões
   const {
     title = "Olá mundo!",
-    withImage = 'true'
+    emoji = "🤙🌎"
   } = props
 
   return `
@@ -26,9 +27,11 @@ module.exports = async (props) => {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
       }
-      img {
-        height: 140px;
+      .emoji {
+        display: flex;
+        flex-wrap: nowrap;
       }
       h1 {
         font-size: 62px;
@@ -37,12 +40,9 @@ module.exports = async (props) => {
     </style>
 
     <div class="container">
-      ${withImage === 'true'
-        ? (
-          `<img src="${PUBLIC_DIR_PATH}/big_heart.png">`
-        )
-        : ''
-      }
+      <div class="emoji">
+        ${parseEmojis(emoji).replace(/png\/32\//gm, 'png/128/')}
+      </div>
       <h1>${title}</h1>
     </div>
   `

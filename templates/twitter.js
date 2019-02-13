@@ -7,6 +7,7 @@ const { PUBLIC_DIR_PATH } = require('../src/Utils')
  * @returns {Promise<string>} Template a ser renderizado.
  */
 module.exports = async (props) => {
+  // Valores padrões
   const {
     username = "github"
   } = props

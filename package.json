@@ -9,11 +9,12 @@
   },
   "dependencies": {
     "chrome-aws-lambda": "^1.11.2",
+    "emojione": "^4.0.0",
     "micro": "^9.3.3",
     "puppeteer-core": "^1.12.1",
     "url": "^0.11.0"
   },
-  "engines" : {
-    "node" : ">=8.0.0"
+  "engines": {
+    "node": ">=8.0.0"
   }
 }

@@ -126,6 +126,11 @@ depd@1.1.1:
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
   integrity sha1-V4O04cRZ8G+lyif5kfPQbnoxA1k=
 
+emojione@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/emojione/-/emojione-4.0.0.tgz#bbe117a1d24d18d3a62b18ef6d42725a59ded258"
+  integrity sha512-ATFSRHrK838NoTUE96j9rpmS1R4a/qpK1maQURGdFtarpWloEttjjIBBWbSFqsUxC0Vot6P2WXmSlotvZoegxw==
+
 es6-promise@^4.0.3:
   version "4.2.5"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.5.tgz#da6d0d5692efb461e082c14817fe2427d8f5d054"

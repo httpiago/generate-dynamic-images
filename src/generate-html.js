@@ -1,11 +1,6 @@
 const { resolve } = require('path');
 const { existsSync: checkFileExists } = require('fs')
-const { writeTempFile, HTTP_ERROR } = require('./Utils')
-
-const templatePath = resolve(`./templates/default.js`)
-
-  // Checar se o template existe
-console.log('checkFileExists', templatePath, '=>', checkFileExists(templatePath))
+const { writeTempFile, HTTP_ERROR, parseEmojis } = require('./Utils')
 
 /**
  * Gerar o HTML do template e salvar em uma pasta temporária do sistema.
@@ -24,7 +19,8 @@ module.exports = async ({ template, ...otherProps }) => {
   }
 
   // Importar template
-  const content = await require(templatePath)(otherProps);
+  const content = await require(templatePath)(otherProps)
+    .then(parseEmojis());
 
   // Gerar HTML
   const html = `

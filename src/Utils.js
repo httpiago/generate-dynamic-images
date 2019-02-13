@@ -6,6 +6,7 @@ const { writeFile } = require('fs');
 const writeFileAsync = promisify(writeFile)
 const { randomBytes } = require('crypto')
 const randomBytesAsync = promisify(randomBytes)
+const emoji = require('emojione')
 
 
 const checkIsDev = !process.env.NOW_REGION
@@ -91,11 +92,27 @@ class HTTP_ERROR {
   }
 }
 
+/**
+ * Converter os emojis (feios) nativos do sistema para o padrão EmojiOne.
+ * @see http://www.emojione.com/
+ * @param {string} [html] - string no padrão unicode (opcional)
+ * @returns {Function|string}
+ */
+function parseEmojis(html) {
+  // Se o html for passado como argumento
+  if (typeof html !== 'undefined') return emoji.toImage(html);
+
+  // Se nenhum argumento for passado, retornar uma função que pode ser usado no
+  // retorno de uma promise. .then(parseEmojis())
+  return (html) => emoji.toImage(html);
+}
+
 module.exports = {
   PUBLIC_DIR_PATH,
   checkIsDev,
   pathToFileURL,
   getChromeConfigs,
   writeTempFile,
-  HTTP_ERROR
+  HTTP_ERROR,
+  parseEmojis
 }

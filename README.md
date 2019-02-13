@@ -62,6 +62,7 @@ const { PUBLIC_DIR_PATH } = require('../src/Utils')
  * @returns {Promise<string>} Template a ser renderizado.
  */
 module.exports = async (props) => {
+  // Valores padrões
   const {
     bigTitle = "Olá mundo!"
   } = props
@@ -83,6 +84,8 @@ O arquivo acima poderá ser acessado por meio da url:
 ```bash
 curl http://localhost:3000?template=FILE_NAME&bigTitle=Hello
 ```
+
+> **Dica:** Você pode usar emojis nos templates tanto no formado [unicode](https://unicode.org/emoji/charts/full-emoji-list.html) quanto no formato [shortname](https://gist.github.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb) que os emojis ~~feios~~ nativos do sistema irão ser convertidos para os do [EmojiOne](https://www.emojione.com/). 🎉😍💯❤
 
 ## Hospedagem
 
