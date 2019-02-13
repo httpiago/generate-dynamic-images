@@ -1,23 +1,24 @@
 # generate-dynamic-images 🤖
 
-Um simples programa em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome em modo _headless_.
+Um simples programa em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e  
+o Google Chrome em modo _headless_. [Veja alguns exemplos de uso](#exemplos-de-uso-).
 
 ![](https://img.shields.io/badge/-HYPE%20ALERT!%20😂-red.svg) 
 [![Online demo](https://img.shields.io/badge/Online-demo-brightgreen.svg)](https://generate-dynamic-images.herokuapp.com/?template=default&title=Hello%20Github%20user!&emoji=%F0%9F%9A%80%F0%9F%8C%8E)
 
 ## Pacotes usados 📦
 
-- [puppeteer](https://www.npmts.com/package/puppeteer): Para manipular o G Chrome em modo _headless_.
-- [micro](https://www.npmts.com/package/micro): Criar um simples servidor http.
-- [typescript](https://www.npmts.com/package/typescript): Fazer a tipagem do código.
+- [puppeteer](https://www.npmjs.com/package/puppeteer): Para manipular o G Chrome em modo _headless_.
+- [micro](https://www.npmjs.com/package/micro): Criar um simples servidor http.
+- [typescript](https://www.npmjs.com/package/typescript): Fazer a tipagem do código.
 - [emojiOne](https://www.emojione.com/): Para renderizar os emojis nos templates.
-- [concurrently](https://www.npmts.com/package/concurrently): Executar vários comandos em paralelo.
-- [nodemon](https://www.npmts.com/package/nodemon): Restartar o servidor quando ocorrer uma alteração.
+- [concurrently](https://www.npmjs.com/package/concurrently): Executar vários comandos em paralelo.
+- [nodemon](https://www.npmjs.com/package/nodemon): Restartar o servidor quando ocorrer uma alteração.
 
 ## Comandos 🤓
 
 - `yarn run build` e `yarn run watch`: Compilar os códigos typescript.
-- `yarn run start`: Iniciar o servidor (com os códigos compilados) na porta 3000.
+- `yarn run start`: Iniciar o servidor em modo produção (com os códigos compilados) na porta 3000.
 - `yarn run dev`: Executa em paralelo os comandos "build" e "start" junto com o nomemon, para que o servidor se auto reiniciei quando ocorrer qualquer alteração de código (Veja também a sessão abaixo).
 
 ## Debug 👾
@@ -69,7 +70,7 @@ Exemplo:
 
 #### templates/FILE_NAME.ts:
 
-```ts
+```js
 import { PUBLIC_DIR_PATH } from '../src/Utils'
 
 /**
@@ -110,6 +111,16 @@ Pode ser hospedado em qualquer servidor que aceite Node, como por exemplo o Hero
 > No caso do Heroku é necessário usar um [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) para o puppeteer funcionar normalmente. Se você escolher outro serviço, terá que checar manualmente se ocorre algum problema.  O botão abaixo configura automaticamente o ambiente pra você.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/httpiago/generate-dynamic-images/tree/master)
+
+## Exemplos de uso 💡
+
+-  Automatizar a criação de thumbnails para vídeos do YouTube ou seu blog.
+-  Automatizar a criação de imagens para serem compartilhadas nas redes sociais pro designer da empresa não ter que fazer manualmente.
+-  Criar uma variação de um logotipo para um evento sazonal.
+-  Personalizar a foto de perfil do usuário (cortar, adicionar um ícone/distintivo no canto, ...).
+-  Edição de fotos usando [css filters](https://css-tricks.com/almanac/properties/f/filter/) (Por que não?).
+-  Usar o [GitHub Webhooks](https://developer.github.com/webhooks/) e criar um sistema que automaticamente detecta uma nova [release em um repo](https://github.com/httpiago/generate-dynamic-images/releases) e publica um tweet anunciando a nova versão.
+-  As possibilidades são infinitas!
 
 ## Inspirações 💭
 
