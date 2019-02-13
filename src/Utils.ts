@@ -1,5 +1,4 @@
 import { join, dirname, basename, resolve } from 'path'
-import chromium from 'chrome-aws-lambda'
 import { tmpdir } from 'os'
 import { promisify } from 'util'
 import { writeFile } from 'fs'
@@ -27,7 +26,7 @@ export function pathToFileURL(path: string): string {
  * Retorna as configurações de inicialização do Google Chrome dependendo do embiente
  * em que o programa está.
  */
-export async function getChromeConfigs(): Promise<ChromeConfigs> {
+export async function getChromeConfigs(): Promise<ChromeLaunchConfigs> {
   return (checkIsDev === true)
     // Configurações do Chrome no embiente de desenvolvimento
     ? {
@@ -38,9 +37,9 @@ export async function getChromeConfigs(): Promise<ChromeConfigs> {
     }
     // Configurações do Chrome no ambiente de produção
     : {
-      args: [ ...chromium.args, '--no-sandbox' ],
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
+      args: [ '--no-sandbox', '--disable-setuid-sandbox' ],
+      // executablePath: null,
+      headless: true,
     }
 }
 

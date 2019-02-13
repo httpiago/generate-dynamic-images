@@ -11,17 +11,16 @@
     "watch": "tsc --watch"
   },
   "dependencies": {
-    "chrome-aws-lambda": "^1.11.2",
     "emojione": "^4.0.0",
     "micro": "^9.3.3",
-    "puppeteer-core": "^1.12.1",
+    "puppeteer": "^1.12.1",
     "url": "^0.11.0"
   },
   "devDependencies": {
     "@types/node": "^11.9.3",
     "@types/emojione": "^2.2.3",
     "@types/micro": "^7.3.3",
-    "@types/puppeteer-core": "^1.9.0",
+    "@types/puppeteer": "^1.9.0",
     "typescript": "^3.3.3"
   },
   "engines": {

@@ -1,7 +1,7 @@
 type FileType = 'jpeg' | 'png'
 
-interface ChromeConfigs {
+interface ChromeLaunchConfigs {
   args: string[];
-  executablePath: string;
-  headless: boolean;
+  executablePath?: string;
+  headless?: boolean;
 }
