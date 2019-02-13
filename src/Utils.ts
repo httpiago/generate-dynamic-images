@@ -23,27 +23,6 @@ export function pathToFileURL(path: string): string {
 }
 
 /**
- * Retorna as configurações de inicialização do Google Chrome dependendo do embiente
- * em que o programa está.
- */
-export async function getChromeConfigs(): Promise<ChromeLaunchConfigs> {
-  return (checkIsDev === true)
-    // Configurações do Chrome no embiente de desenvolvimento
-    ? {
-      args: [],
-      // Local da instalação do Chrome no Windows
-      executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-      headless: true,
-    }
-    // Configurações do Chrome no ambiente de produção
-    : {
-      args: [ '--no-sandbox', '--disable-setuid-sandbox' ],
-      // executablePath: null,
-      headless: true,
-    }
-}
-
-/**
  * Caminho para a pasta "public" que pode ser acessada tanto no servidor
  * como localmente.
  */

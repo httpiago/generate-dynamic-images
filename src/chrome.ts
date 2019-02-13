@@ -1,11 +1,18 @@
 import puppeteer from 'puppeteer'
-import { getChromeConfigs, pathToFileURL } from './Utils'
+import { pathToFileURL } from './Utils'
 
 interface Configs {
   filePath: string;
   fileType: FileType;
   quality: number;
   omitBackground: boolean;
+}
+
+interface ChromeLaunchConfigs {
+  args: string[];
+  executablePath?: string;
+  headless: boolean;
+  defaultViewport?: object;
 }
 
 /**
@@ -18,15 +25,16 @@ async function getScreenshot(configs: Configs): Promise<Buffer> {
   const { filePath, fileType = 'jpeg', quality = 90, omitBackground = false } = configs
 
   // Criar instância do Chrome
-  const chromeLaunchConfigs = await getChromeConfigs();
-  const browser = await puppeteer.launch(chromeLaunchConfigs);
+  const browser = await puppeteer.launch({
+    args: [ '--no-sandbox', '--disable-setuid-sandbox' ],
+    // executablePath: null, // Instalação do Chrome local = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
+    headless: true,
+    defaultViewport: {
+      width: 1, height: 1
+    }
+  } as ChromeLaunchConfigs);
 
   const page = await browser.newPage();
-
-  await page.setViewport({
-    width: 1,
-    height: 1
-  });
 
   await page.goto(pathToFileURL(filePath));
   

@@ -19,14 +19,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.9.3.tgz#14adbb5ab8cd563f549fbae8dbe92e0b7d6e76cc"
   integrity sha512-DMiqG51GwES/c4ScBY0u5bDlH44+oY8AeYHjY1SGCWidD7h08o1dfHue/TGK7REmif2KiJzaUskO+Q0eaeZ2fQ==
 
-"@types/puppeteer-core@^1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@types/puppeteer-core/-/puppeteer-core-1.9.0.tgz#5ceb397e3ff769081fb07d71289b5009392d24d3"
-  integrity sha512-YJwGTq0a8xZxN7/QDeW59XMdKTRNzDTc8ZVBPDB6J13GgXn1+QzgMA8pAq1/bj2FD0R7xj3nYoZra10b0HLzFw==
-  dependencies:
-    "@types/puppeteer" "*"
-
-"@types/puppeteer@*":
+"@types/puppeteer@^1.9.0":
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.12.1.tgz#f61f9e0da45e36cdbbeab3b088995a8a2cad47a4"
   integrity sha512-6qpe7XXM93iWh8quEP8Ay516Vmfc2r+ZAxFH3Mt6fx3vzmZz+4Q+hYxc9PxeEIXJhWLAAPYAgAiM/vLHEUwGpw==
@@ -88,11 +81,6 @@ chalk@2.4.0:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
-
-chrome-aws-lambda@^1.11.2:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/chrome-aws-lambda/-/chrome-aws-lambda-1.11.2.tgz#5cf7ed4f90157007f78a8e30a79df89ac2c48906"
-  integrity sha512-BpR7qYNkPZlMQGZI3/edrPT4Rx9Hd/Z+YV3dQ5ujfWj01r27pYYOoOmMd2w3mkmFeHF7nzFlksM/urKnfICwDQ==
 
 color-convert@^1.9.0:
   version "1.9.3"
@@ -346,10 +334,10 @@ punycode@1.3.2:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
   integrity sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0=
 
-puppeteer-core@^1.12.1:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-1.12.1.tgz#aec39d9c199ceff6ddd4da00e0733bb73fce4156"
-  integrity sha512-arGXPRe1dkX3+tOh1GMQ0Ny3CoOCRurkHAW4AZEBIBMX/LdY6ReFqRTT9YSV3d9zzxiIat9kJc3v9h9nkxAu3g==
+puppeteer@^1.12.1:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.12.2.tgz#dbc36afc3ba2d7182b1a37523c0081a0e8507c9a"
+  integrity sha512-xWSyCeD6EazGlfnQweMpM+Hs6X6PhUYhNTHKFj/axNZDq4OmrVERf70isBf7HsnFgB3zOC1+23/8+wCAZYg+Pg==
   dependencies:
     debug "^4.1.0"
     extract-zip "^1.6.6"
