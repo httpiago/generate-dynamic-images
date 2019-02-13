@@ -1,17 +1,18 @@
 # generate-dynamic-images 🤖
 
-Um simples servidor em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome.
+Um simples programa em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome em modo _headless_.
 
-#### [Inspirado nesse repositório](https://github.com/styfle/og-image) • [Online demo](https://generate-dynamic-images.herokuapp.com/?template=default&title=Hello%20Github%20user!&emoji=%F0%9F%9A%80%F0%9F%8C%8E)
+![](https://img.shields.io/badge/-HYPE%20ALERT!%20😂-red.svg) 
+![Online demo](https://img.shields.io/badge/Online-demo-brightgreen.svg) 
 
 ## Pacotes usados 📦
 
-- [puppeteer](https://www.npmts.com/package/puppeteer)
-- [micro](https://www.npmts.com/package/micro)
-- [typescript](https://www.npmts.com/package/typescript)
-- [emojione](https://www.emojione.com/)
-- [concurrently](https://www.npmts.com/package/concurrently)
-- [nodemon](https://www.npmts.com/package/nodemon)
+- [puppeteer](https://www.npmts.com/package/puppeteer): Para manipular o G Chrome em modo _headless_.
+- [micro](https://www.npmts.com/package/micro): Criar um simples servidor http.
+- [typescript](https://www.npmts.com/package/typescript): Fazer a tipagem do código.
+- [emojiOne](https://www.emojione.com/): Para renderizar os emojis nos templates.
+- [concurrently](https://www.npmts.com/package/concurrently): Executar vários comandos em paralelo.
+- [nodemon](https://www.npmts.com/package/nodemon): Restartar o servidor quando ocorrer uma alteração.
 
 ## Comandos 🤓
 
@@ -29,9 +30,9 @@ Esse projeto está configurado para rodar o debugger do VS Code, basta pressiona
 
 ![Fluxograma do processo](/public/fluxograma.jpeg)
 
-- O passo 1 ocorre no arquivo [src/parser.ts](/src/parser.ts)
-- Os passos 2 e 3 acontecem nos arquivos [templates/**.ts](/templates/default.ts) e [src/generate-html.ts](/src/generate-html.ts), respectivamente
-- Os passos 4 e 5 acontecem no arquivo [src/chrome.ts](/src/chrome.ts)
+- O passo 1 ocorre no arquivo [src/parser.ts](/src/parser.ts).
+- Os passos 2 e 3 acontecem nos arquivos [templates/**.ts](/templates/default.ts) e [src/generate-html.ts](/src/generate-html.ts), respectivamente.
+- Os passos 4 e 5 acontecem no arquivo [src/chrome.ts](/src/chrome.ts).
 
 ## Exemplo de solicitação 👨‍🏫
 
@@ -59,11 +60,12 @@ Cache-Control: public, immutable, no-transform, max-age=31536000
 | quality     | 0-100 | 90 | Sim | Qualidade do resultado (OBS: Só funciona se o type for "jpeg"). |
 | transparent | true ou false | false | Sim | Use essa opção para remover o fundo da página (OBS: Só funciona se o type for "png" e se o template não conter um fundo também). |
 
-#### Outros valores para personalizar a imagem em si (como "title", "withImage", ...) variam de acordo com o template. Veja as opções disponíveis em cada arquivo da pasta "[template](/template)".
+#### Outros valores para personalizar a imagem em si (como "title", "withImage", ...) variam de acordo com o template. Veja as opções disponíveis para cada arquivo da pasta "[templates](/templates)".
 
 ## Templates 📚
 
-Templates nada mais são do que um arquivo .ts que exporta por padrão uma função assíncrona pura que recebe as opções definidas no query string das solicitações no primeiro argumento e retorna um html que será printado. Exemplo:
+Templates nada mais são do que um arquivo .ts que exporta por padrão uma função assíncrona pura que recebe as opções definidas no [query string](https://en.wikipedia.org/wiki/Query_string) das solicitações no primeiro argumento e retorna um html que será printado 🤔.  
+Exemplo:
 
 #### templates/FILE_NAME.ts:
 
@@ -108,6 +110,10 @@ Pode ser hospedado em qualquer servidor que aceite Node, como por exemplo o Hero
 > No caso do Heroku é necessário usar um [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) para o puppeteer funcionar normalmente. Se você escolher outro serviço, terá que checar manualmente se ocorre algum problema.  O botão abaixo configura automaticamente o ambiente pra você.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/httpiago/generate-dynamic-images/tree/master)
+
+## Inspirações 💭
+
+Inspirado [nesse repositório](https://github.com/styfle/og-image).
 
 ## License 📜
 
