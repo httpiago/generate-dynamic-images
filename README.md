@@ -3,7 +3,7 @@
 Um simples programa em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome em modo _headless_.
 
 ![](https://img.shields.io/badge/-HYPE%20ALERT!%20😂-red.svg) 
-![Online demo](https://img.shields.io/badge/Online-demo-brightgreen.svg) 
+[![Online demo](https://img.shields.io/badge/Online-demo-brightgreen.svg)](https://generate-dynamic-images.herokuapp.com/?template=default&title=Hello%20Github%20user!&emoji=%F0%9F%9A%80%F0%9F%8C%8E)
 
 ## Pacotes usados 📦
 
