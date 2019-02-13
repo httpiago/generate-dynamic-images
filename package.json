@@ -6,20 +6,26 @@
   "main": "dist/src/index.js",
   "scripts": {
     "start": "node dist/src/index.js",
-    "postdeploy": "npm run build",
+    "dev": "concurrently \"yarn run watch\" \"yarn run dev-server\"",
+    "dev-server": "nodemon --watch dist --exec \"yarn run start\"",
+    "postinstall": "yarn run build",
     "build": "tsc",
     "watch": "tsc --watch"
   },
   "dependencies": {
-    "@types/node": "^11.9.3",
     "@types/emojione": "^2.2.3",
     "@types/micro": "^7.3.3",
+    "@types/node": "^11.9.3",
     "@types/puppeteer": "^1.9.0",
     "emojione": "^4.0.0",
     "micro": "^9.3.3",
     "puppeteer": "^1.12.1",
     "typescript": "^3.3.3",
     "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.10"
   },
   "engines": {
     "node": ">=8.0.0"

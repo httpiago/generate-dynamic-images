@@ -12,9 +12,6 @@
       "url": "heroku/nodejs"
     }
   ],
-  "scripts": {
-    "postdeploy": "npm run build"
-  },
   "success_url": "/?template=default&title=Hello%20Heroku!&emoji=⚛",
   "keywords": [
     "node",
