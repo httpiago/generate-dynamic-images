@@ -1,29 +1,44 @@
-# generate-dynamic-images
+# generate-dynamic-images 🤖
 
 Um simples servidor em Node que automatiza o processo de criação de imagens dinâmicas usando HTML e o Google Chrome.
 
 #### [Inspirado nesse repositório](https://github.com/styfle/og-image) • [Online demo](https://generate-dynamic-images.herokuapp.com/?template=default&title=Hello%20Github%20user!&emoji=%F0%9F%9A%80%F0%9F%8C%8E)
 
-## Pacotes usados
+## Pacotes usados 📦
 
-- [puppeteer](https://www.npmjs.com/package/puppeteer)
-- [micro](https://www.npmjs.com/package/micro)
-- [typescript](https://www.npmjs.com/package/typescript)
+- [puppeteer](https://www.npmts.com/package/puppeteer)
+- [micro](https://www.npmts.com/package/micro)
+- [typescript](https://www.npmts.com/package/typescript)
+- [emojione](https://www.emojione.com/)
+- [concurrently](https://www.npmts.com/package/concurrently)
+- [nodemon](https://www.npmts.com/package/nodemon)
 
-## Fluxograma
+## Comandos 🤓
+
+- `yarn run build` e `yarn run watch`: Compilar os códigos typescript.
+- `yarn run start`: Iniciar o servidor (com os códigos compilados) na porta 3000.
+- `yarn run dev`: Executa em paralelo os comandos "build" e "start" junto com o nomemon, para que o servidor se auto reiniciei quando ocorrer qualquer alteração de código (Veja também a sessão abaixo).
+
+## Debug 👾
+
+Esse projeto está configurado para rodar o debugger do VS Code, basta pressionar F5 e selecionar a opção "Attach to a running server".
+
+**OBS**: Necessita que o comando `yarn run dev` seja executado antes em um terminal separado.
+
+## Fluxograma 🤔
 
 ![Fluxograma do processo](/public/fluxograma.jpeg)
 
-- O passo 1 ocorre no arquivo `src/parser.js`
-- Os passos 2 e 3 acontecem nos arquivos `templates/**.js` e `src/generate-html.js`, respectivamente
-- Os passos 4 e 5 acontecem no arquivo `src/chrome.js`
+- O passo 1 ocorre no arquivo [src/parser.ts](/src/parser.ts)
+- Os passos 2 e 3 acontecem nos arquivos [templates/**.ts](/templates/default.ts) e [src/generate-html.ts](/src/generate-html.ts), respectivamente
+- Os passos 4 e 5 acontecem no arquivo [src/chrome.ts](/src/chrome.ts)
 
-## Exemplo de solicitação
+## Exemplo de solicitação 👨‍🏫
 
-Você deve passar as opções que o arquivo "/src/generate-html.js" irá receber através do _query string_ do url, veja o exemplo abaixo:
+Você deve passar as opções que o arquivo "/src/generate-html.ts" irá receber através do _query string_ do url, veja o exemplo abaixo:
 
-```bash
-curl http://localhost:3000?template=default&title=Custom%20title
+```
+curl http://localhost:3000?template=default&type=jpeg&title=Custom%20title
 ```
 
 #### Resposta:
@@ -46,13 +61,13 @@ Cache-Control: public, immutable, no-transform, max-age=31536000
 
 #### Outros valores para personalizar a imagem em si (como "title", "withImage", ...) variam de acordo com o template. Veja as opções disponíveis em cada arquivo da pasta "[template](/template)".
 
-## Templates
+## Templates 📚
 
 Templates nada mais são do que um arquivo .ts que exporta por padrão uma função assíncrona pura que recebe as opções definidas no query string das solicitações no primeiro argumento e retorna um html que será printado. Exemplo:
 
 #### templates/FILE_NAME.ts:
 
-```js
+```ts
 import { PUBLIC_DIR_PATH } from '../src/Utils'
 
 /**
@@ -87,13 +102,13 @@ curl http://localhost:3000?template=FILE_NAME&bigTitle=Hello
 
 > **Dica:** Você pode usar emojis nos templates tanto no formado [unicode](https://unicode.org/emoji/charts/full-emoji-list.html) quanto no formato [shortname](https://gist.github.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb) que os emojis ~~feios~~ nativos do sistema irão ser convertidos para os do [EmojiOne](https://www.emojione.com/). 🎉😍💯❤
 
-## Hospedagem
+## Hospedagem 🌎
 
 Pode ser hospedado em qualquer servidor que aceite Node, como por exemplo o Heroku. Lembrando que é necessário a compilação dos códigos typescript.
 > No caso do Heroku é necessário usar um [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) para o puppeteer funcionar normalmente. Se você escolher outro serviço, terá que checar manualmente se ocorre algum problema.  O botão abaixo configura automaticamente o ambiente pra você.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/httpiago/generate-dynamic-images/tree/master)
 
-## License
+## License 📜
 
 MIT

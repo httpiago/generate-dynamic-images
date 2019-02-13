@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node dist/src/index.js",
     "dev": "concurrently \"yarn run watch\" \"yarn run dev-server\"",
-    "dev-server": "nodemon --watch dist --exec \"yarn run start\"",
+    "dev-server": "nodemon --watch dist --exec \"node --inspect dist/src/index.js\"",
     "postinstall": "yarn run build",
     "build": "tsc",
     "watch": "tsc --watch"
