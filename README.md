@@ -53,7 +53,7 @@ Templates nada mais são do que um arquivo .js que exporta por padrão uma funç
 #### templates/FILE_NAME.js:
 
 ```js
-const { PUBLIC_DIR_PATH } = require('../src/Utils')
+import { PUBLIC_DIR_PATH } from '../src/Utils'
 
 /**
  * Gerar HTML de uma imagem genérica para teste.

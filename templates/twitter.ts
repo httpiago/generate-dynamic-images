@@ -1,4 +1,4 @@
-const { PUBLIC_DIR_PATH } = require('../src/Utils')
+import { PUBLIC_DIR_PATH } from '../src/Utils'
 
 /**
  * Gerar html da uma imagem para ser compartilhada no twitter.
@@ -6,7 +6,7 @@ const { PUBLIC_DIR_PATH } = require('../src/Utils')
  * @param {Object} props Valores recebidos no query string da solicitação.
  * @returns {Promise<string>} Template a ser renderizado.
  */
-module.exports = async (props) => {
+export default async (props: any): Promise<string> => {
   // Valores padrões
   const {
     username = "github"

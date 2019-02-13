@@ -3,9 +3,12 @@
   "version": "1.1.0",
   "repository": "https://github.com/httpiago/generate-dynamic-images.git",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node dist/src/index.js",
+    "postinstall": "npm run build",
+    "build": "tsc",
+    "watch": "tsc --watch"
   },
   "dependencies": {
     "chrome-aws-lambda": "^1.11.2",
@@ -13,6 +16,13 @@
     "micro": "^9.3.3",
     "puppeteer-core": "^1.12.1",
     "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^11.9.3",
+    "@types/emojione": "^2.2.3",
+    "@types/micro": "^7.3.3",
+    "@types/puppeteer-core": "^1.9.0",
+    "typescript": "^3.3.3"
   },
   "engines": {
     "node": ">=8.0.0"

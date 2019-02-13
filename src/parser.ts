@@ -1,12 +1,12 @@
-const { HTTP_ERROR } = require('./Utils')
-const url = require('url')
+import { HTTP_ERROR } from './Utils'
+import url from 'url'
 
 /**
  * Transformar o query string da solicitação em um object que possa ser
  * entendido pelo JavaScript.
  * @returns {Object}
  */
-module.exports = async (req) => {
+async function parseRequest(req: any): Promise<any> {
   const { query } = url.parse(req.url, true);
 
   // Checar se o client definiu um template a ser usado
@@ -19,3 +19,5 @@ module.exports = async (req) => {
 
   return query || {}
 }
+
+export default parseRequest

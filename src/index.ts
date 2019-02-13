@@ -1,12 +1,13 @@
-const micro = require('micro')
-const parseRequest = require('./parser')
-const generateHTML = require('./generate-html')
-const getScreenshot = require('./chrome')
+import micro from 'micro'
+import parseRequest from './parser'
+import generateHTML from './generate-html'
+import getScreenshot from './chrome'
+import { IncomingMessage, ServerResponse } from 'http'
 
 /**
  * Função acionada pelo pacote micro sempre que o servidor for chamado na porta 3000.
  */
-async function requestHandler(req, res) {
+async function requestHandler(req: IncomingMessage, res: ServerResponse) {
   try {
     // Pegar as informações passada no queryString
     const parsedReq = await parseRequest(req)
@@ -17,7 +18,7 @@ async function requestHandler(req, res) {
 
     // Gerar o HTML da página
     const filePath = await generateHTML(parsedReq)
-    const fileType = parsedReq.type || 'jpeg'
+    const fileType: FileType = parsedReq.type || 'jpeg'
 
     // Tirar um print da página salva no passo anterior
     const file = await getScreenshot({
@@ -47,7 +48,7 @@ async function requestHandler(req, res) {
   }
 }
 
-const PORT = process.env.PORT || 3000
+const PORT: number|string = process.env.PORT || 3000
 
 // INIT!
 micro(requestHandler)

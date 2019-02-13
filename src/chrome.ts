@@ -1,5 +1,12 @@
-const puppeteer = require('puppeteer-core')
-const { getChromeConfigs, pathToFileURL} = require('./Utils')
+import puppeteer from 'puppeteer-core'
+import { getChromeConfigs, pathToFileURL } from './Utils'
+
+interface Configs {
+  filePath: string;
+  fileType: FileType;
+  quality: number;
+  omitBackground: boolean;
+}
 
 /**
  * Criar uma nova instância do Google Chrome e tirar um print do arquivo passado
@@ -7,9 +14,11 @@ const { getChromeConfigs, pathToFileURL} = require('./Utils')
  * @param {Object} configs - Algumas configurações a serem passadas ao navegador (Ver mais no README.md)
  * @returns {Image} Print gerado pelo Chrome
  */
-module.exports = async ({ filePath, fileType = 'jpeg', quality = 90, omitBackground = false }) => {
-  const chromeLaunchConfigs = await getChromeConfigs();
+async function getScreenshot(configs: Configs): Promise<Buffer> {
+  const { filePath, fileType = 'jpeg', quality = 90, omitBackground = false } = configs
+
   // Criar instância do Chrome
+  const chromeLaunchConfigs = await getChromeConfigs();
   const browser = await puppeteer.launch(chromeLaunchConfigs);
 
   const page = await browser.newPage();
@@ -36,3 +45,5 @@ module.exports = async ({ filePath, fileType = 'jpeg', quality = 90, omitBackgro
 
   return file;
 }
+
+export default getScreenshot

@@ -1,21 +1,21 @@
-const { join, dirname, basename, resolve } = require('path')
-const chromium = require('chrome-aws-lambda')
-const { tmpdir } = require('os');
-const { promisify } = require('util');
-const { writeFile } = require('fs');
+import { join, dirname, basename, resolve } from 'path'
+import chromium from 'chrome-aws-lambda'
+import { tmpdir } from 'os'
+import { promisify } from 'util'
+import { writeFile } from 'fs'
+import { randomBytes } from 'crypto'
+import emoji from 'emojione'
 const writeFileAsync = promisify(writeFile)
-const { randomBytes } = require('crypto')
 const randomBytesAsync = promisify(randomBytes)
-const emoji = require('emojione')
 
 
-const checkIsDev = !process.env.NOW_REGION
+export const checkIsDev: boolean = process.env.NODE_ENV !== 'production'
 
 /**
  * Transformar o url de um arquivo local em um url que o Chrome possa entender.
  * @param {string} path 
  */
-function pathToFileURL(path) {
+export function pathToFileURL(path: string): string {
   const fileName = basename(path);
   const folderName = dirname(path);
   const fileUrl = 'file://' + join(folderName, encodeURIComponent(fileName));
@@ -27,7 +27,7 @@ function pathToFileURL(path) {
  * Retorna as configurações de inicialização do Google Chrome dependendo do embiente
  * em que o programa está.
  */
-async function getChromeConfigs() {
+export async function getChromeConfigs(): Promise<ChromeConfigs> {
   return (checkIsDev === true)
     // Configurações do Chrome no embiente de desenvolvimento
     ? {
@@ -38,7 +38,7 @@ async function getChromeConfigs() {
     }
     // Configurações do Chrome no ambiente de produção
     : {
-      args: chromium.args,
+      args: [ ...chromium.args, '--no-sandbox' ],
       executablePath: await chromium.executablePath,
       headless: chromium.headless,
     }
@@ -48,13 +48,13 @@ async function getChromeConfigs() {
  * Caminho para a pasta "public" que pode ser acessada tanto no servidor
  * como localmente.
  */
-const PUBLIC_DIR_PATH = pathToFileURL( resolve(__dirname, '..', 'public').replace(/dist\\/g, '') )
+export const PUBLIC_DIR_PATH: string = pathToFileURL( resolve(__dirname, '..', 'public').replace(/dist\\/g, '') )
 
 /**
  * Salvar um arquivo em uma pasta temporária.
  * @param {string} contents 
  */
-async function writeTempFile(contents) {
+export async function writeTempFile(contents: string): Promise<string> {
   let htmlFilePath
 
   if (checkIsDev) {
@@ -75,20 +75,25 @@ async function writeTempFile(contents) {
 /**
  * Criar um erro personalizado para mostrar mais informações ao cliente.
  */
-class HTTP_ERROR {
+export class HTTP_ERROR {
+  public title: string;
+  public statusCode: number;
+  public message: string;
+
   constructor({ statusCode = 500, message = 'Ocorreu um erro desconhecido. Veja mais no console' }) {
-    const error = new Error(message)
+    // Show call stack in console
+    console.trace()
 
     // https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status
-    error.title =
+    this.title =
       (statusCode === 400) ? 'Bad Request' :
       (statusCode === 403) ? 'Forbidden' :
       (statusCode === 404) ? 'Error 404' :
       'Internal Server Error'
-    
-    error.statusCode = statusCode
+    this.statusCode = statusCode
+    this.message = message
 
-    return error;
+    return this;
   }
 }
 
@@ -98,21 +103,11 @@ class HTTP_ERROR {
  * @param {string} [html] - string no padrão unicode (opcional)
  * @returns {Function|string}
  */
-function parseEmojis(html) {
+export function parseEmojis(html?: string): string|Function|any {
   // Se o html for passado como argumento
   if (typeof html !== 'undefined') return emoji.toImage(html);
 
   // Se nenhum argumento for passado, retornar uma função que pode ser usado no
   // retorno de uma promise. .then(parseEmojis())
-  return (html) => emoji.toImage(html);
-}
-
-module.exports = {
-  PUBLIC_DIR_PATH,
-  checkIsDev,
-  pathToFileURL,
-  getChromeConfigs,
-  writeTempFile,
-  HTTP_ERROR,
-  parseEmojis
+  return (html: string): string => emoji.toImage(html);
 }
